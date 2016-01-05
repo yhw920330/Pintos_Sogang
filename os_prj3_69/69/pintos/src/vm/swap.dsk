@@ -1,0 +1,27 @@
+pintos-mkdisk, a utility for creating Pintos virtual disks
+Usage: pintos-mkdisk [OPTIONS] DISK [-- ARGUMENT...]
+where DISK is the virtual disk to create,
+      each ARGUMENT is inserted into the command line written to DISK,
+  and each OPTION is one of the following options.
+Partition options: (where PARTITION is one of: kernel filesys scratch swap)
+  --PARTITION=FILE         Use a copy of FILE for the given PARTITION
+  --PARTITION-size=SIZE    Create an empty PARTITION of the given SIZE in MB
+  --PARTITION-from=DISK    Use of a copy of the given PARTITION in DISK
+  (There is no --kernel-size option.)
+Output disk options:
+  --format=partitioned     Write partition table to output (default)
+  --format=raw             Do not write partition table to output
+  (Pintos can only use partitioned disks.)
+Partitioned format output options:
+  --loader[=FILE]          Get bootstrap loader from FILE (default: loader.bin
+                           if --kernel option is specified, empty otherwise)
+  --no-loader              Do not include a bootstrap loader
+  --geometry=H,S           Use H head, S sector geometry (default: 16, 63)
+  --geometry=zip           Use 64 head, 32 sector geometry for USB-ZIP boot
+                           per http://syslinux.zytor.com/usbkey.php
+  --align=bochs            Round size to cylinder for Bochs support (default)
+  --align=full             Align partition boundaries to cylinder boundary to
+                           let fdisk guess correct geometry and quiet warnings
+  --align=none             Don't align partitions at all, to save space
+Other options:
+  -h, --help               Display this help message.
